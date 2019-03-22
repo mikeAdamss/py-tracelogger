@@ -5,13 +5,6 @@ import logger_constants as lc
 
 from kafka_handler import KafkaHandler
 
-levelLookup = {
-        "debug":logging.DEBUG,
-        "warning":logging.WARNING,
-        "info":logging.INFO,
-        "error":logging.ERROR
-    }
-
 # Our main logging class
 class NewLogger(object):
 
