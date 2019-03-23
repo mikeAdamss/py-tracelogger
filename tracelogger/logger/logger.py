@@ -10,6 +10,9 @@ class NewLogger(object):
 
     def __init__(self, nameSpace=None, handler=None, handlerArgs=None, logLevel=None):
 
+        # ------------------------------
+        # Sanity check the provided args
+
         if nameSpace == None:
             raise ValueError("Logger must be initialsed with a namespace keyword argument.")
 
@@ -25,11 +28,35 @@ class NewLogger(object):
         # Convert string log level to the appropriate int
         logLevel = lc.LOG_LEVEL_LOOKUP[logLevel]
 
+        # ----------------------------
+        # Initialise the chosen logger
+
         if handler == lc.KAFKA:
             self.logger = getKafkaHandler(nameSpace, logLevel, handlerArgs)
 
-    def debug(self, msg):
-        self.logger.debug(msg)
+    # The writeLog mehod is intended to be overwritten to allow logging to a specification.
+    def writeLog(self, record):
+        return record
+
+    # # Create a debug level log
+    def debug(self, record):
+        record = self.writeLog(record)
+        self.logger.debug(record)
+
+    # Create a warning level log
+    def warning(self, record):
+        record = self.writeLog(record)
+        self.logger.warning(record)
+
+    # Create a error level log
+    def error(self, record):
+        record = self.writeLog(record)
+        self.logger.error(record)
+
+    # Create a ingo level log
+    def info(self, record):
+        record = self.writeLog(record)
+        self.logger.error(record)
 
     def close(self):
         self.logger.handlers[0].close()

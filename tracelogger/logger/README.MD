@@ -1,18 +1,12 @@
 
-# py-tracelogger
+# py-tracelogger : logger
 
-A wrapper library to enable logging and tracing.
-
-WORK-IN-PROGRESS
+My wrapper for logging.
 
 
-## Currently supports handlers for:
+## Kafka Logger
 
-* logging to kafka topics
-
-
-
-## Kafka
+Create a standard logger
 
 ```python
 from logger import NewLogger
@@ -22,8 +16,32 @@ handlerArgs = {"kafka_hostlist":"localhost:9092", "kafka_topic":"kafka_logs_out"
 log = NewLogger(nameSpace="example-logger", logLevel="debug", handler="Kafka", handlerArgs=handlerArgs)
 
 # Use it
-log.debug() # etc
+log.debug({"message":""I am a message"}) # etc
 ```
+
+results in logging
+`"{'message': 'foo', 'time': '<time goes here>'}"`
+
+Create a custom logger
+
+```python
+
+# Create a custom log writer that adds a custom time stamp
+class NewLoggerWithTime(NewLogger):
+    def writeLog(self, record):
+        record.update({"time":"<time goes here>"})
+        return record
+
+# Create our new logger
+handlerArgs = {"kafka_hostlist":"localhost:9092", "kafka_topic":"lll-logs-out"}
+log = NewLoggerWithTime(nameSpace="example-logger", logLevel="debug", handler="Kafka", handlerArgs=handlerArgs)
+
+log.debug({"message":"I am a message"})
+
+```
+
+results in logging
+`"{"message":""I am a message", "time":"<time goes here>"}"`
 
 
 ## Note

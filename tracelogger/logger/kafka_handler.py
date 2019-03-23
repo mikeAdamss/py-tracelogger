@@ -34,7 +34,9 @@ class KafkaHandler(logging.Handler):
         try:
             # apply the logger formatter
             msg = self.format(record)
-            self.producer.send(self.topic, {'message': msg})
+            self.producer.send(self.topic, msg)
+            self.flush()
+
         except Exception:
             logging.Handler.handleError(self, record)
 
