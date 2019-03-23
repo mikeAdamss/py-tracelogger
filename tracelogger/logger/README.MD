@@ -6,7 +6,10 @@ My wrapper for logging.
 
 ## Kafka Logger
 
-Create a standard logger
+Simple kafka logger. Logs messages to chosen kafka topic.
+
+
+### Create a standard logger
 
 ```python
 from logger import NewLogger
@@ -20,9 +23,11 @@ log.debug({"message":""I am a message"}) # etc
 ```
 
 results in logging
-`"{'message': 'foo', 'time': '<time goes here>'}"`
+`"{'message': 'foo'}"`
 
-Create a custom logger
+
+
+### Create a custom logger
 
 ```python
 
