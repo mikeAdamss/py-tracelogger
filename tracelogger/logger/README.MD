@@ -51,6 +51,8 @@ results in logging
 
 ## Note
 
+For dev purposes, there is a docker-compose file included in the ../resources directory.
+
 I've included a docker-compose file for zookeeper+kafka and you should be able to log directly to it with this wrapper.
 
 However, be aware the docker image includes metrics for the supporting company.
