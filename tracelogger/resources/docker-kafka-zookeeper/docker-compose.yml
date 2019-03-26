@@ -3,7 +3,7 @@ version: '2'
 services:
 
   zookeeper:
-    container_name: confluent_zookeeper_test_logging
+    container_name: confluent_zookeeper_dev_logging
     image: confluentinc/cp-zookeeper:4.1.0
     ports:
       - "2181:2181"
@@ -13,12 +13,12 @@ services:
       - trial
 
   kafka:
-    container_name: confluent_kafka_test_logging
+    container_name: confluent_kafka_dev_logging
     image: confluentinc/cp-kafka:4.1.0
     ports:
       - "9092:9092"
     environment:
-      - KAFKA_ZOOKEEPER_CONNECT= confluent_zookeeper_test_logging:2181
+      - KAFKA_ZOOKEEPER_CONNECT= confluent_zookeeper_dev_logging:2181
       - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
       - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
     networks:
